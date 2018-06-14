@@ -36,14 +36,11 @@ public class a1z26 {
 	}
 
 	// method - trimMessage
-	// clear the message of any punctuation or spaces
+	// clear the message of any punctuation
 
 	public static String trimMessage(String message) {
 		
 		String newMessage = message;
-
-		// remove space
-		newMessage = newMessage.replace(" ","");
 
 		// remove .
 		newMessage = newMessage.replace(".","");
@@ -54,7 +51,7 @@ public class a1z26 {
 		// remove !
 		newMessage = newMessage.replace("!","");
 
-		// add further keyboard inputs at a later time
+		// add more keyboard inputs later
 
 		return newMessage;
 
@@ -88,11 +85,18 @@ public class a1z26 {
 
 					cipheredMessage = (cipheredMessage + (j+1));
 
-					if (i < characterCount - 1) {
+					// only print the "-" in between the numbers
+					if (i < characterCount - 1 && uncipheredMessage.charAt(i+1) != ' ') {
 
 						cipheredMessage = cipheredMessage + "-";
 					}
 
+					break;
+				}
+
+				// add spaces between words
+				if (letter == ' ') {
+					cipheredMessage = cipheredMessage + " ";
 					break;
 				}
 			}
