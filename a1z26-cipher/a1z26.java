@@ -6,9 +6,8 @@ public class a1z26 {
 	Key for the cipher A1Z26
 
 	Each letter of the alphatbet is replaed by a number.
-	
 
-	example:
+	implementation example:
 
 		input: hello
 		output: 8-5-12-12-15
@@ -26,16 +25,18 @@ public class a1z26 {
 
 	public static void main(String[] args) {
 		
+		// scanner obtain user input
 		Scanner keyIn = new Scanner(System.in);
 		
-		
+		// encrypt or decrypt
 		System.out.println("Enter 'E' for encrypt and 'D' for decrypt: ");
 		String option = keyIn.nextLine();
 
 		if (option.equals("E")) {
-			
+
 			System.out.println("Enter a message to encrypt: ");
 
+			// receive user message and encrypt, returning code
 			String nonCypherMsg = keyIn.nextLine();
 			System.out.println(encrypt(nonCypherMsg));
 
@@ -43,6 +44,7 @@ public class a1z26 {
 
 			System.out.println("Enter a message to decrypt: ");
 
+			// receive user code format and decrypt, return original message
 			String nonCypherMsg = keyIn.nextLine();
 			String[] message = deSpace(nonCypherMsg);
 			String cryptMessage = decrypt(message);
@@ -129,6 +131,9 @@ public class a1z26 {
 
 	}
 
+	// method - despace
+	// seperate each word, delimited by spaces, into an array
+	// containing the full message
 	public static String[] deSpace(String cryptMsg) {
 
 		Scanner input = new Scanner(cryptMsg);
@@ -140,27 +145,30 @@ public class a1z26 {
 		return msgNumbers;
 	}
 
-	// method - preCrypt
-	// switch hyphenated number words to non-hyphenated number words
+	// method - deCrypt
+	// fully decrypt the message using the method "translate"
 
 	public static String decrypt(String[] msgNumbers) {
 
 		String decryptMsg = "";
 		String token = "";
 
+		// cycle through each word of the message
 		for ( int i = 0; i < msgNumbers.length; i++) {
 
 			// reset token var
 			token = "";
 
-			// scan in each number, delimted by hypens
+			// scan in each number, delimited by hypens
 			Scanner input = new Scanner(msgNumbers[i]);
 			input.useDelimiter("-");
 
+			// add spaces between the words
 			if ( i >= 1 ) {
 				decryptMsg = decryptMsg + " ";
 			}
 
+			// scan in each word
 			while ( input.hasNext() ){
 			
 				token = "";
@@ -175,11 +183,12 @@ public class a1z26 {
 		return "Decrypted Message: " + decryptMsg;
 	}
 
-
+	// method - translate
+	// swap each number with its representing letter
 	public static String translate(String msg) {
 
 		String msgHandle = "";
-
+		
 		int currentCharacter = Integer.parseInt(msg);
 		msgHandle = msgHandle + alphabet[currentCharacter-1];	
 
