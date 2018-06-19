@@ -25,14 +25,37 @@ public class a1z26 {
 
 
 	public static void main(String[] args) {
-
+		
 		Scanner keyIn = new Scanner(System.in);
-	
-		System.out.println("Enter a message to encrypt, letters only: ");
-		String nonCypherMsg = keyIn.nextLine();
+		
+		
+		System.out.println("Enter 'E' for encrypt and 'D' for decrypt: ");
+		String option = keyIn.nextLine();
 
+		if (option.equals("E")) {
+			
+			System.out.println("Enter a message to encrypt: ");
 
-		System.out.println(encrypt(nonCypherMsg));
+			String nonCypherMsg = keyIn.nextLine();
+			System.out.println(encrypt(nonCypherMsg));
+
+		} else if (option.equals("D")){
+
+			System.out.println("Enter a message to decrypt: ");
+
+			String nonCypherMsg = keyIn.nextLine();
+			String[] message = deSpace(nonCypherMsg);
+			String cryptMessage = decrypt(message);
+			System.out.println(cryptMessage);
+
+		} else {
+
+			System.out.println("Invalid input. Quitting program.");
+		}
+
+		
+		
+
 	}
 
 	// method - trimMessage
@@ -58,7 +81,7 @@ public class a1z26 {
 	}
 
 	// method - encrypt
-	// cipher the message
+	// cipher an unciphered message
 
 	public static String encrypt(String message) {
 
@@ -102,7 +125,64 @@ public class a1z26 {
 			}
 		}
 
-		return cipheredMessage;
+		return "Encrypted Message: " + cipheredMessage;
 
+	}
+
+	public static String[] deSpace(String cryptMsg) {
+
+		Scanner input = new Scanner(cryptMsg);
+		String numbers = "";
+
+		String[] msgNumbers = cryptMsg.split(" ");
+
+
+		return msgNumbers;
+	}
+
+	// method - preCrypt
+	// switch hyphenated number words to non-hyphenated number words
+
+	public static String decrypt(String[] msgNumbers) {
+
+		String decryptMsg = "";
+		String token = "";
+
+		for ( int i = 0; i < msgNumbers.length; i++) {
+
+			// reset token var
+			token = "";
+
+			// scan in each number, delimted by hypens
+			Scanner input = new Scanner(msgNumbers[i]);
+			input.useDelimiter("-");
+
+			if ( i >= 1 ) {
+				decryptMsg = decryptMsg + " ";
+			}
+
+			while ( input.hasNext() ){
+			
+				token = "";
+				token = input.next();
+
+				decryptMsg = decryptMsg + translate(token);
+
+			}
+
+		}
+
+		return "Decrypted Message: " + decryptMsg;
+	}
+
+
+	public static String translate(String msg) {
+
+		String msgHandle = "";
+
+		int currentCharacter = Integer.parseInt(msg);
+		msgHandle = msgHandle + alphabet[currentCharacter-1];	
+
+		return msgHandle;
 	}
 }
