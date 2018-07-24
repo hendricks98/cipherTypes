@@ -5,9 +5,9 @@ This repository is a collection of different programs that use different ciphers
 
 # Cipher List
 List of ciphers types found inside the repo, will be updated as more types are created
-  * [x]: A1Z26 cipher
+  = [x] A1Z26 cipher
     * Basic cipher where each alphabetical letter is replaced by its number, 1-26
     * Supports multiple words
     * Encryption and decryption
-  * [x]: Caesar cipher
+  - [x] Caesar cipher
     * Basic cipher where the alphabet is rotated by a certain number of letters
