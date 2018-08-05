@@ -97,7 +97,6 @@ public class a1z26 {
 		int characterCount = uncipheredMessage.length();
 
 		//	encrypt one letter at a time, creating a hyphen delimited string
-
 		for (int i = 0; i < characterCount; i++){
 
 			char letter = uncipheredMessage.charAt(i);
@@ -108,7 +107,6 @@ public class a1z26 {
 					cipheredMessage = (cipheredMessage + (j+1));
 
 					// skip delimiter when reaching the end of the message or when in between words
-
 					if (i < characterCount - 1 && uncipheredMessage.charAt(i+1) != ' ') {
 
 						cipheredMessage = cipheredMessage + "-";
@@ -140,7 +138,6 @@ public class a1z26 {
 
 	// method - decrypt
 	// return a decrypted message from an array of encrypted words
-
 	public static String decrypt(String[] encryptedWords) {
 
 		String decryptMsg = "";

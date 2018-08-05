@@ -1,10 +1,17 @@
 import java.util.Scanner;
 
+
+/* The caesar cipher rotates the alphabet n times and swaps out each letter of the original message
+using the rotated alphabet
+
+implementation example:
+input: abc
+(three rotations)
+output: xyz */
 public class caesar {
-	
+
 	static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	static char[] ciphAlphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};; 
-	static char codeKey[];
+	static char[] ciphAlphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	static String msgList[];
 	static String message;
 
@@ -15,22 +22,10 @@ public class caesar {
 		message = input.nextLine();
 		System.out.println(encrypt(message));
 
-		/*
-		// verify the ciphAlphabet is actually changing - check
-		System.out.print("alphabet: ");
-		for (int h = 0; h < alphabet.length; h++){
-			System.out.print(alphabet[h]);
-		}
-		System.out.println("");
-		System.out.print("codeKey: ");
-		for (int i = 0; i < codeKey.length; i++){
-			System.out.print(codeKey[i]);
-		}
-		*/
-
-
 	}
 
+	// method - rotate(n rotations)
+	// rotate the alphabet by one letter n times and return
 	public static char[] rotate(int numRotations) {
 		for (int i = 0; i < numRotations; i++){
 
@@ -44,7 +39,7 @@ public class caesar {
 				char save = ciphAlphabet[j];
 				ciphAlphabet[j] = swap;
 				swap = save;
-			
+
 			}
 
 			// swap the first letter with the original last letter
@@ -56,14 +51,17 @@ public class caesar {
 		return ciphAlphabet;
 	}
 
-	public static void deSpace(String cryptMsg) {
+	// method - splitMessage
+	// return an array of encrypted words from an encrypted message string
+	public static void splitMessage(String cryptMsg) {
 
 		Scanner input = new Scanner(cryptMsg);
 
 		msgList = cryptMsg.split(" ");
 
 	}
-
+	// method - encrypt
+	// cipher an unciphered message
 	public static String encrypt(String message) {
 		String encryptMsg = "";
 		int indexKey = 0;
@@ -74,7 +72,7 @@ public class caesar {
 		int rotationCt = keyIn.nextInt();
 		ciphAlphabet = rotate(rotationCt);
 
-		deSpace(message);
+		splitMessage(message);
 
 		for (int i = 0; i < msgList.length; i++) {
 
@@ -93,22 +91,11 @@ public class caesar {
 					}
 				}
 
-
 			}
 			encryptMsg = encryptMsg + " ";
 		}
 
 		return "Ciphered message: " + encryptMsg;
 	}
-
-
-
-
-
-
-
-
-
-
 
 }
