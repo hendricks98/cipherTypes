@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Hashtable;
 
 public class a1z26 {
 	/* Key for the cipher A1Z26
@@ -11,8 +12,18 @@ public class a1z26 {
 		A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
 		1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 */
 	static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	static Hashtable<Character, Integer> encryptTable = new Hashtable<>();
+	static Hashtable<Integer, Character> decryptTable = new Hashtable<>();
 
 	public static void main(String[] args) {
+
+		// add keys and values to hashtables
+		int value = 1;
+		for (char i = 'a'; i <= 'z'; i++){
+			encryptTable.put(i,value);
+			decryptTable.put(value, i);
+			value++;
+		}
 
 		// scanner obtain user input
 		Scanner keyIn = new Scanner(System.in);
@@ -65,7 +76,6 @@ public class a1z26 {
 		// add more keyboard inputs later
 
 		return newMessage;
-
 	}
 
 	// method - encrypt
@@ -83,29 +93,27 @@ public class a1z26 {
 		for (int i = 0; i < characterCount; i++){
 
 			char letter = uncipheredMessage.charAt(i);
+			System.out.println("THE LETTER IM LOOKING FOR: " + letter);
 
-			for (int j = 0; j <= 25; j++){
-				if (alphabet[j] == letter){
-
-					cipheredMessage = (cipheredMessage + (j+1));
-
-					// skip delimiter when reaching the end of the message or when in between words
-					if (i < characterCount - 1 && uncipheredMessage.charAt(i+1) != ' ') {
-
-						cipheredMessage = cipheredMessage + "-";
-					}
-
-					break;
+			// if the next char is a letter, add the corresponding number to the cipheredMessage
+			if (letter == ' '){
+				cipheredMessage = cipheredMessage + " ";
+			}else {
+				// add a "-" between each letter, except when adding the first letter or a letter after a space
+				if (i > 0 && (uncipheredMessage.charAt(i-1)) != ' '){
+					cipheredMessage = cipheredMessage + "-";
 				}
-
-				// add spaces between words
-				if (letter == ' ') {
-					cipheredMessage = cipheredMessage + " ";
-					break;
-				}
+				cipheredMessage = cipheredMessage + Integer.toString(encryptTable.get(letter));
 			}
-		}
 
+			/*
+			// skip delimiter when reaching the end of the message or when in between words
+			if (i < characterCount - 1 && uncipheredMessage.charAt(i+1) != "  ") {
+				cipheredMessage = cipheredMessage + "-";
+			}
+			*/
+
+		}
 		return "Encrypted Message:" + cipheredMessage;
 
 	}
@@ -142,6 +150,7 @@ public class a1z26 {
 			while ( input.hasNext() ){
 
 				token = input.next();
+				System.out.println("token = " + token);
 				decryptMsg = decryptMsg + decryptLetter(token);
 
 			}
@@ -157,7 +166,7 @@ public class a1z26 {
 		String decryptedLetter = "";
 
 		int i = Integer.parseInt(letter);
-		decryptedLetter = decryptedLetter + alphabet[i-1];
+		decryptedLetter = decryptedLetter + decryptTable.get(i);
 
 		return decryptedLetter;
 	}
