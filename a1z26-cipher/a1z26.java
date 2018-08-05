@@ -1,27 +1,16 @@
 import java.util.Scanner;
 
 public class a1z26 {
-	/*
-
-	Key for the cipher A1Z26
+	/* Key for the cipher A1Z26
 
 	Each letter of the alphabet is replaced by a number.
-
 	implementation example:
-
 		input: hello
 		output: 8-5-12-12-15
-
 	Key:
-
 		A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
-		1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
-
-	*/
-
+		1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 */
 	static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
-
 
 	public static void main(String[] args) {
 
@@ -56,14 +45,10 @@ public class a1z26 {
 			System.out.println("Invalid input. Quitting program.");
 		}
 
-
-
-
 	}
 
 	// method - trimMessage
 	// clear the message of any punctuation
-
 	public static String trimMessage(String message) {
 
 		String newMessage = message;
@@ -85,12 +70,10 @@ public class a1z26 {
 
 	// method - encrypt
 	// cipher an unciphered message
-
 	public static String encrypt(String message) {
 
 		String uncipheredMessage;
 		String cipheredMessage = "";
-
 
 		uncipheredMessage = trimMessage(message);
 		uncipheredMessage = uncipheredMessage.toLowerCase();
@@ -159,11 +142,9 @@ public class a1z26 {
 			while ( input.hasNext() ){
 
 				token = input.next();
-
 				decryptMsg = decryptMsg + decryptLetter(token);
 
 			}
-
 		}
 
 		return "Decrypted Message: " + decryptMsg;
