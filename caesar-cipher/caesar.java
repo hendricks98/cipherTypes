@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 /* The caesar cipher rotates the alphabet n times and swaps out each letter of the original message
 using the rotated alphabet
 
@@ -10,92 +9,59 @@ input: abc
 output: xyz */
 public class caesar {
 
-	static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	static char[] ciphAlphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	static String msgList[];
+	static String option;
 	static String message;
+	static int rotations;
+	static boolean encrypt;
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
+		System.out.println("Enter 'E' for encrypt or 'D' for decrypt: ");
+		option = input.nextLine();
+
+		if (option.equals("E")){
+			encrypt = true;
+		} else if (option.equals("D")){
+			encrypt = false;
+		} else {
+			System.out.println("Invalid input. Quitting the program.");
+			System.exit(0);
+		}
 
 		System.out.println("Enter a message to cipher: ");
 		message = input.nextLine();
-		System.out.println(encrypt(message));
+		System.out.println("How many rotations: ");
+		rotations = input.nextInt();
+		System.out.println(encryptMessage(message, rotations, encrypt));
 
 	}
 
-	// method - rotate(n rotations)
-	// rotate the alphabet by one letter n times and return
-	public static char[] rotate(int numRotations) {
-		for (int i = 0; i < numRotations; i++){
+	// handles encrypting and decrypting of message
+	public static String encryptMessage(String uncipheredMessage, int numRotations, boolean encrypt){
 
-			// hold the first and last element
-			char alphaTemp = ciphAlphabet[25];
-			char swap = ciphAlphabet[0];
+		uncipheredMessage = uncipheredMessage.toLowerCase();
+		int characterCount = uncipheredMessage.length();
 
-			// rotate the alphabet by one space
-			for (int j = 1; j < ciphAlphabet.length; j++) {
+		String cipheredMessage = "";
+		// iterate character-by-character through the unciphered message
+		for (int i = 0; i < characterCount; i++){
 
-				char save = ciphAlphabet[j];
-				ciphAlphabet[j] = swap;
-				swap = save;
+			char letter = uncipheredMessage.charAt(i);
+			char cipherLetter = ' ';
 
+			// rotate alphabet forward (+) for encrypt, backward (-) for decrypt
+			// note: instead of using a new method repeating the logic for decrypt, add
+			// a boolean (boolean encrypt) where true => encrypt, false => decrypt
+			if (encrypt == true){
+				cipherLetter = (char) (letter + numRotations);
+			} else if (encrypt == false) {
+				cipherLetter = (char) (letter - numRotations);
 			}
 
-			// swap the first letter with the original last letter
-			// after swapping the rest of the alphabet
-			ciphAlphabet[0] = alphaTemp;
+			cipheredMessage = cipheredMessage + cipherLetter;
 
 		}
-
-		return ciphAlphabet;
-	}
-
-	// method - splitMessage
-	// return an array of encrypted words from an encrypted message string
-	public static void splitMessage(String cryptMsg) {
-
-		Scanner input = new Scanner(cryptMsg);
-
-		msgList = cryptMsg.split(" ");
-
-	}
-	// method - encrypt
-	// cipher an unciphered message
-	public static String encrypt(String message) {
-		String encryptMsg = "";
-		int indexKey = 0;
-
-		System.out.println("Enter number of rotations: ");
-		Scanner keyIn = new Scanner(System.in);
-
-		int rotationCt = keyIn.nextInt();
-		ciphAlphabet = rotate(rotationCt);
-
-		splitMessage(message);
-
-		for (int i = 0; i < msgList.length; i++) {
-
-			for (int j = 0; j < msgList[i].length(); j++) {
-
-				char query = msgList[i].charAt(j);
-
-				// search through alphabet for matching letter
-				for (int k = 0; k < alphabet.length; k++) {
-
-					if (alphabet[k] == query) {
-
-						indexKey = k;
-						encryptMsg = encryptMsg + ciphAlphabet[indexKey];
-
-					}
-				}
-
-			}
-			encryptMsg = encryptMsg + " ";
-		}
-
-		return "Ciphered message: " + encryptMsg;
+		return cipheredMessage;
 	}
 
 }
