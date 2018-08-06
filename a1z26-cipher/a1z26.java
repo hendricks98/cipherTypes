@@ -11,7 +11,6 @@ public class a1z26 {
 	Key:
 		A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z
 		1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 */
-	static char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	static Hashtable<Character, Integer> encryptTable = new Hashtable<>();
 	static Hashtable<Integer, Character> decryptTable = new Hashtable<>();
 
@@ -106,16 +105,8 @@ public class a1z26 {
 				cipheredMessage = cipheredMessage + Integer.toString(encryptTable.get(letter));
 			}
 
-			/*
-			// skip delimiter when reaching the end of the message or when in between words
-			if (i < characterCount - 1 && uncipheredMessage.charAt(i+1) != "  ") {
-				cipheredMessage = cipheredMessage + "-";
-			}
-			*/
-
 		}
 		return "Encrypted Message:" + cipheredMessage;
-
 	}
 
 	// method - splitMessage
