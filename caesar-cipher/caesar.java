@@ -49,6 +49,12 @@ public class caesar {
 			char letter = uncipheredMessage.charAt(i);
 			char cipherLetter = ' ';
 
+			// if char is a space, add a space without rotation
+			if (letter == ' '){
+				cipheredMessage = cipheredMessage + " ";
+				continue;
+			}
+
 			// rotate alphabet forward (+) for encrypt, backward (-) for decrypt
 			// note: instead of using a new method repeating the logic for decrypt, add
 			// a boolean (boolean encrypt) where true => encrypt, false => decrypt
