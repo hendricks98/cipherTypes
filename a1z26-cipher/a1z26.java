@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Hashtable;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class a1z26 {
 	/* Key for the cipher A1Z26
@@ -16,6 +18,9 @@ public class a1z26 {
 
 	public static void main(String[] args) {
 
+		JFrame frame = new JFrame();
+
+
 		// add keys and values to hashtables
 		int value = 1;
 		for (char i = 'a'; i <= 'z'; i++){
@@ -27,33 +32,40 @@ public class a1z26 {
 		// scanner obtain user input
 		Scanner keyIn = new Scanner(System.in);
 
-		// encrypt or decrypt
-		System.out.println("Enter 'E' for encrypt and 'D' for decrypt: ");
-		String option = keyIn.nextLine();
+		// create text field for message and buttons for encrypt or decrypt
+		JLabel desc = new JLabel("Enter a message to encrypt/decrypt and push the corresponding button");
+		desc.setBounds(50,50,600,80);
 
-		if (option.equals("E")) {
+		JTextField msgField = new JTextField(30);
+		msgField.setBounds(50,110,400,30);
 
-			System.out.println("Enter a message to encrypt: ");
+		JButton encryptBT = new JButton("Encrypt");
+		encryptBT.setBounds(50,140,80,30);
+		encryptBT.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String nonCypherMsg = msgField.getText();
+				msgField.setText(encrypt(nonCypherMsg));
+			}
+		});
 
-			// receive user message and encrypt, returning code
-			String nonCypherMsg = keyIn.nextLine();
-			System.out.println(encrypt(nonCypherMsg));
+		JButton decryptBT = new JButton("Decrypt");
+		decryptBT.setBounds(130,140,80,30);
+		decryptBT.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String cypheredMsg = msgField.getText();
+				String[] message = splitMessage(cypheredMsg);
+				msgField.setText(decrypt(message));
+			}
+		});
 
-		} else if (option.equals("D")){
 
-			System.out.println("Enter a message to decrypt: ");
-
-			// receive user code format and decrypt, return original message
-			String nonCypherMsg = keyIn.nextLine();
-			String[] message = splitMessage(nonCypherMsg);
-
-			String cryptMessage = decrypt(message);
-			System.out.println(cryptMessage);
-
-		} else {
-
-			System.out.println("Invalid input. Quitting program.");
-		}
+		frame.add(desc);
+		frame.add(msgField);
+		frame.add(encryptBT);
+		frame.add(decryptBT);
+		frame.setSize(800,400);
+		frame.setLayout(null);
+		frame.setVisible(true);
 
 	}
 
@@ -92,7 +104,6 @@ public class a1z26 {
 		for (int i = 0; i < characterCount; i++){
 
 			char letter = uncipheredMessage.charAt(i);
-			System.out.println("THE LETTER IM LOOKING FOR: " + letter);
 
 			// if the next char is a letter, add the corresponding number to the cipheredMessage
 			if (letter == ' '){
@@ -106,7 +117,7 @@ public class a1z26 {
 			}
 
 		}
-		return "Encrypted Message:" + cipheredMessage;
+		return cipheredMessage;
 	}
 
 	// method - splitMessage
@@ -147,7 +158,7 @@ public class a1z26 {
 			}
 		}
 
-		return "Decrypted Message: " + decryptMsg;
+		return decryptMsg;
 	}
 
 	// method - decryptLetter
