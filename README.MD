@@ -8,7 +8,14 @@ List of ciphers types found inside the repo, will be updated as more types are c
     * Basic cipher where each alphabetical letter is replaced by its number, 1-26
     * Supports multiple words
     * Encryption and decryption
+    * GUI for optimal user experience
   - [x] Caesar cipher
     * Basic cipher where the alphabet is rotated by a certain number of letters
     * Supports multiple words
     * Encryption and decryption
+
+# Screenshots
+
+### A1Z26 CIPHER:
+![Encrypt](/screenshots/encrypt.png)
+![Decrypt](/screenshots/decrypt.png)
