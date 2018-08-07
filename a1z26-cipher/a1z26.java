@@ -39,13 +39,17 @@ public class a1z26 {
 		JTextField msgField = new JTextField(30);
 		msgField.setBounds(50,110,400,30);
 
+		// create seperate text field for crypted/decrypted messages
+		JTextField finalMessage = new JTextField(30);
+		finalMessage.setBounds(50,170,400,30);j
+
 		// add action listener for each button to initiate cipher/decipher process
 		JButton encryptBT = new JButton("Encrypt");
 		encryptBT.setBounds(50,140,80,30);
 		encryptBT.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String nonCipherMsg = msgField.getText();
-				msgField.setText(encrypt(nonCipherMsg));
+				finalMessage.setText(encrypt(nonCipherMsg));
 			}
 		});
 
@@ -55,15 +59,19 @@ public class a1z26 {
 			public void actionPerformed(ActionEvent e){
 				String cipheredMessage = msgField.getText();
 				String[] message = splitMessage(cipheredMessage);
-				msgField.setText(decrypt(message));
+				finalMessage.setText(decrypt(message));
 			}
 		});
+
+
+
 
 		// add all java swing objects to frame and enable visibility
 		frame.add(desc);
 		frame.add(msgField);
 		frame.add(encryptBT);
 		frame.add(decryptBT);
+		frame.add(finalMessage);
 		frame.setSize(550,300);
 		frame.setLayout(null);
 		frame.setLocationRelativeTo(null);
