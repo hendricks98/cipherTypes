@@ -17,5 +17,5 @@ List of ciphers types found inside the repo, will be updated as more types are c
 # Screenshots
 
 ### A1Z26 CIPHER:
-![Encrypt](/screenshots/encrypt.png)
-![Decrypt](/screenshots/decrypt.png)
+![Encrypt](/a1z26-cipher/screenshots/encrypt.png)
+![Decrypt](/a1z26-cipher/screenshots/decrypt.png)
