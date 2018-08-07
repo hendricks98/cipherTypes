@@ -64,8 +64,9 @@ public class a1z26 {
 		frame.add(msgField);
 		frame.add(encryptBT);
 		frame.add(decryptBT);
-		frame.setSize(800,400);
+		frame.setSize(550,300);
 		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 	}
@@ -153,7 +154,6 @@ public class a1z26 {
 			while ( input.hasNext() ){
 
 				token = input.next();
-				System.out.println("token = " + token);
 				decryptMsg = decryptMsg + decryptLetter(token);
 
 			}
