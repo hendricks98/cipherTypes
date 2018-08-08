@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.event.*;
 
 /* The caesar cipher rotates the alphabet n times and swaps out each letter of the original message
 using the rotated alphabet
@@ -12,27 +14,63 @@ public class caesar {
 	static String option;
 	static String message;
 	static int rotations;
-	static boolean encrypt;
 
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter 'E' for encrypt or 'D' for decrypt: ");
-		option = input.nextLine();
 
-		if (option.equals("E")){
-			encrypt = true;
-		} else if (option.equals("D")){
-			encrypt = false;
-		} else {
-			System.out.println("Invalid input. Quitting the program.");
-			System.exit(0);
-		}
+		JFrame frame = new JFrame();
 
-		System.out.println("Enter a message to cipher: ");
-		message = input.nextLine();
-		System.out.println("How many rotations: ");
-		rotations = input.nextInt();
-		System.out.println(encryptMessage(message, rotations, encrypt));
+		JLabel desc = new JLabel("Enter number of rotations and message to encrypt/decrypt, then push corresponding button:");
+		desc.setBounds(30,25,600,80);
+
+		JLabel rotLabel = new JLabel("Rotations:");
+		rotLabel.setBounds(30,55,100,80);
+
+		JTextField rotField = new JTextField();
+		rotField.setBounds(100,85,30,20);
+
+		JLabel msgLabel = new JLabel("Message:");
+		msgLabel.setBounds(135,55,100,80);
+
+		JTextField msgField = new JTextField();
+		msgField.setBounds(195,85,430,20);
+
+		JTextField finalMessage = new JTextField();
+		finalMessage.setBounds(25,145,650,20);
+
+		// add action listener for each button to initiate cipher/decipher process
+		JButton encryptBT = new JButton("Encrypt");
+		encryptBT.setBounds(25,110,80,30);
+		encryptBT.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				rotations = ( Integer.parseInt(rotField.getText()));
+				message = msgField.getText();
+				finalMessage.setText(encryptMessage(message,rotations, true));
+			}
+		});
+
+		JButton decryptBT = new JButton("Decrypt");
+		decryptBT.setBounds(100,110,80,30);
+		decryptBT.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				rotations = ( Integer.parseInt(rotField.getText()));
+				message = msgField.getText();
+				finalMessage.setText(encryptMessage(message,rotations, false));
+			}
+		});
+
+		frame.add(desc);
+		frame.add(rotLabel);
+		frame.add(rotField);
+		frame.add(msgLabel);
+		frame.add(msgField);
+		frame.add(encryptBT);
+		frame.add(decryptBT);
+		frame.add(finalMessage);
+
+		frame.setSize(700,250);
+		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
 	}
 
