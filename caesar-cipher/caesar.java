@@ -98,8 +98,24 @@ public class caesar {
 			// a boolean (boolean encrypt) where true => encrypt, false => decrypt
 			if (encrypt == true){
 				cipherLetter = (char) (letter + numRotations);
+
+				// ascii letter codes are only codes 97-122
+				if (cipherLetter > 122){
+					char swap = (char) (cipherLetter - 122);
+					System.out.println("Cipher letter: " + cipherLetter);
+					System.out.println("Swap: " + swap);
+					cipherLetter = (char) (96 + swap);
+				}
 			} else if (encrypt == false) {
 				cipherLetter = (char) (letter - numRotations);
+
+				// ascii letter codes are only codes 97-122
+				if (cipherLetter < 97){
+					char swap = (char) (97 - cipherLetter);
+					System.out.println("Cipher letter: " + cipherLetter);
+					System.out.println("Swap: " + swap);
+					cipherLetter = (char) (123 - swap);
+				}
 			}
 
 			cipheredMessage = cipheredMessage + cipherLetter;
