@@ -17,5 +17,13 @@ List of ciphers types found inside the repo, will be updated as more types are c
 # Screenshots
 
 ### A1Z26 CIPHER:
+#### Encrypt Demo
 ![Encrypt](/a1z26-cipher/screenshots/encrypt.png)
+#### Decrypt Demo
 ![Decrypt](/a1z26-cipher/screenshots/decrypt.png)
+
+### CAESAR CIPHER:
+#### Encrypt Demo
+![Encrypt](/caesar-cipher/screenshots/encrypt.png)
+#### Decrypt Demo
+![Decrypt](/caesar-cipher/screenshots/decrypt.png)
